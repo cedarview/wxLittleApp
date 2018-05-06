@@ -1,0 +1,27 @@
+/* pages/newsDetail/newsDetail.wxss */
+.container{
+  position: relative;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+  padding-top: 5rpx;
+}
+.title{
+  font-size: 50rpx;
+}
+
+.ndesc{
+  top: 1;
+  font-size: 24rpx;
+  display: flex;
+  flex-direction: row;
+}
+
+.readCount{
+  top: 1;
+  right: 0;
+}
+
+.source{
+  top: 1;
+  left: 0;
+}

@@ -1,0 +1,22 @@
+<!--index.wxml-->
+<view class='container'>
+  <scroll-view scroll-x>
+    <view class='typeList'>
+      <view wx:for="{{newsType}}" wx:key="id" wx:for-index="i" class='typeItem'>
+        <view class='type' bindtap='onNewsTypeChange' data-value='{{item.key}}'>{{item.value}}</view>
+      </view>
+    </view>
+  </scroll-view>
+</view>
+
+<view class='data-item' wx:for="{{pagenews}}" wx:key="id" wx:for-index="i">
+  <view class='itemContainer' data-id='{{item.id}}' bindtap='onClickNewsItem'>
+    <view class='descContainer'>
+      <view class='desc'>{{item.title}}</view>
+      <view class='source'>{{item.source}}</view>
+    </view>
+    <view class='imgContainer'>
+      <image class="newsbgimg" src="{{item.firstImage}}"></image>
+    </view>
+  </view>
+</view>

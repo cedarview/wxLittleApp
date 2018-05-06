@@ -1,0 +1,13 @@
+<!--pages/newsDetail/newsDetail.wxml-->
+<view class='container'>
+  <view class='title'>{{title}}</view>
+  <view class='ndesc'>
+    <view class='source'>{{source}}\t{{date}}</view>
+    <view class='readCount'>阅读 {{readCount}}</view>
+  </view>  
+  <view>
+    <view class='content' wx:for="{{contents}}" wx:key="id" wx:for-index="i">
+      <rich-text nodes='{{item.nodes}}'></rich-text>
+    </view>
+  </view>
+</view>
