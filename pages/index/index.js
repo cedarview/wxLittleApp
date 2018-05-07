@@ -23,8 +23,9 @@ Page({
   }, 
   onPullDownRefresh() {    
       console.log("pull down");
-      this.refresh();
-      wx.stopPullDownRefresh();
+      this.refresh(() => {
+        wx.stopPullDownRefresh()
+      });
   },
   setTypes() {
     let types = [];
@@ -39,7 +40,7 @@ Page({
       newsType: types
     })
   },
-  getNewsByType(ntype) {
+  getNewsByType(ntype,callback) {
     console.log(ntype);
     wx.request({
       url: 'https://test-miniprogram.com/api/news/list',
@@ -59,6 +60,7 @@ Page({
       },
       complete: () => {
         console.log("getNewsByType complete");
+        callback && callback();
       }
     })
   },
@@ -77,8 +79,8 @@ Page({
     this.refresh();
     
   },
-  refresh(){
-    this.getNewsByType(this.data.seletedType);
+  refresh(callback){
+    this.getNewsByType(this.data.seletedType,callback);
   },
   onClickNewsItem(options) {
     let id = options.currentTarget.dataset.id;

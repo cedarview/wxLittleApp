@@ -7,6 +7,7 @@ Page({
    */
   data: {
     contents:{},
+    id:'',
     title: '',
     date: '',
     source: '',
@@ -19,15 +20,24 @@ Page({
    */
   onLoad: function (options) {
     console.log("secondpage");
-    let id = options.id;
-    this.getNewsDetail(id);
+    //let id = options.id;
+    this.setData({
+      id: options.id
+    })
+    this.getNewsDetail(this.data.id);
   },
   onPullDownRefresh() {
     console.log("pull down new detail");
-    wx.stopPullDownRefresh();
+    this.getNewsDetail(this.data.id, () => {
+      wx.stopPullDownRefresh()
+    });
+    //wx.stopPullDownRefresh();
   },
 
-  getNewsDetail: function (id) {
+  getNewsDetail: function (id,callback) {
+    if(id==null||id.lenth<=0){
+      return;
+    }
     console.log(id);
     wx.request({
       url: 'https://test-miniprogram.com/api/news/detail',
@@ -39,6 +49,7 @@ Page({
       },
       complete: () => {
         console.log("getNewsDetail complete");
+        callback && callback();
       }
     })
   },
