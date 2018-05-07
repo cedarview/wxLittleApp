@@ -1,4 +1,5 @@
 // pages/newsDetail/newsDetail.js
+var util = require('../../utils/util.js');  
 Page({
 
   /**
@@ -21,6 +22,10 @@ Page({
     let id = options.id;
     this.getNewsDetail(id);
   },
+  onPullDownRefresh() {
+    console.log("pull down new detail");
+    wx.stopPullDownRefresh();
+  },
 
   getNewsDetail: function (id) {
     console.log(id);
@@ -30,8 +35,7 @@ Page({
         id: id
       },
       success: res => {
-        let result = res.data.result;
-        this.setNewsDetailToPage(result);
+        this.setNewsDetailToPage(res.data.result);
       },
       complete: () => {
         console.log("getNewsDetail complete");
@@ -53,7 +57,7 @@ Page({
       }
       // console.log(part);
     }
-    let date = newsDetail.date;
+    let date = util.formatTime(new Date(newsDetail.date));
 
     this.setData({
       contents: tmpContent,

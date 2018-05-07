@@ -8,24 +8,23 @@ newsRange.set("ty", "体育");
 newsRange.set("other", "其它");
 /*gn、gj、cj、yl、js、ty和other*/
 
-const newsTypsMap = {
-  'gn': '国内',
-  'gj': '国际',
-  'cj': '财经阴',
-  'yl': '娱乐',
-  'js': '教育',
-  'ty': '体育',
-  "other": "其它"
-}
-
 Page({
   data: {
     pagenews: {},
-    newsType: {}
+    newsType: {},
+    seletedType:""
   },
   onLoad: function () {
-    this.setTypes();
-    this.getNewsByType("gn");
+    this.setTypes();    
+    this.setData({
+      seletedType: "gn"
+    })
+    this.refresh();
+  }, 
+  onPullDownRefresh() {    
+      console.log("pull down");
+      this.refresh();
+      wx.stopPullDownRefresh();
   },
   setTypes() {
     let types = [];
@@ -49,9 +48,11 @@ Page({
       },
       success: res => {
         let result = res.data.result;
-        // for (var item of result) {
-        //   console.log(item);
-        // }
+        for (let item of result) {
+          let dateString = item.date;
+          var date = this.simplifyDate(new Date(dateString));
+          item.date = date;    
+        }        
         this.setData({
           pagenews: result
         });
@@ -61,14 +62,26 @@ Page({
       }
     })
   },
+  simplifyDate: function(date){
+    let hour = date.getHours();
+    let minutes = date.getMinutes()
+    return hour + ":" + (minutes >= 10 ? minutes:"0"+minutes)
+  }
+  ,
   onNewsTypeChange: function (options) {
     console.log("onNewsTypeChange");
-    let newstype = options.currentTarget.dataset.value
-    this.getNewsByType(newstype);
+    let nnewstype = options.currentTarget.dataset.value
+    this.setData({
+      seletedType: nnewstype
+    })
+    this.refresh();
+    
   },
-  onClickNewsItem(options){
+  refresh(){
+    this.getNewsByType(this.data.seletedType);
+  },
+  onClickNewsItem(options) {
     let id = options.currentTarget.dataset.id;
-    console.log(id);
     wx.navigateTo({
       url: '/pages/newsDetail/newsDetail?id=' + id,
     })

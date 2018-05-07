@@ -13,10 +13,14 @@
   <view class='itemContainer' data-id='{{item.id}}' bindtap='onClickNewsItem'>
     <view class='descContainer'>
       <view class='desc'>{{item.title}}</view>
-      <view class='source'>{{item.source}}</view>
+      <view class='source'>
+        <view wx:if="{{item.source.length>0}}">{{item.source}}</view>
+        <view>{{item.date}}</view>
+      </view>
     </view>
-    <view class='imgContainer'>
+    <view class='imgContainer' wx:if="{{item.firstImage!=null&&item.firstImage.length>0}}">
       <image class="newsbgimg" src="{{item.firstImage}}"></image>
     </view>
   </view>
 </view>
+

@@ -2,7 +2,8 @@
 <view class='container'>
   <view class='title'>{{title}}</view>
   <view class='ndesc'>
-    <view class='source'>{{source}}\t{{date}}</view>
+    <view class='source' wx:if="{{source.length>0}}" >{{source}}</view>
+    <view >{{date}}</view>
     <view class='readCount'>阅读 {{readCount}}</view>
   </view>  
   <view>
