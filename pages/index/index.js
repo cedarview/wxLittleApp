@@ -42,6 +42,9 @@ Page({
   },
   getNewsByType(ntype,callback) {
     console.log(ntype);
+    wx.showLoading({
+      title: "加载中"
+    });
     wx.request({
       url: 'https://test-miniprogram.com/api/news/list',
       data: {
@@ -61,6 +64,7 @@ Page({
       complete: () => {
         console.log("getNewsByType complete");
         callback && callback();
+        wx.hideLoading();
       }
     })
   },

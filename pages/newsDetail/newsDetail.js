@@ -39,6 +39,9 @@ Page({
       return;
     }
     console.log(id);
+    wx.showLoading({
+      title: "加载中"
+    });
     wx.request({
       url: 'https://test-miniprogram.com/api/news/detail',
       data: {
@@ -50,6 +53,7 @@ Page({
       complete: () => {
         console.log("getNewsDetail complete");
         callback && callback();
+        wx.hideLoading();
       }
     })
   },

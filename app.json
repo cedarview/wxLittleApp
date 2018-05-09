@@ -4,7 +4,7 @@
     "pages/newsDetail/newsDetail"
   ],
   "window": {
-    "backgroundTextStyle": "light",
+    "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#34A1E2",
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle": "black",

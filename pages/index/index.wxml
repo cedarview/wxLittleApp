@@ -3,7 +3,8 @@
   <scroll-view scroll-x>
     <view class='typeList'>
       <view wx:for="{{newsType}}" wx:key="id" wx:for-index="i" class='typeItem'>
-        <view class='type' bindtap='onNewsTypeChange' data-value='{{item.key}}'>{{item.value}}</view>
+        <view wx:if="{{item.key==seletedType}}" class='selectedType' bindtap='onNewsTypeChange' data-value='{{item.key}}'>{{item.value}}</view>
+        <view wx:else class='type' bindtap='onNewsTypeChange' data-value='{{item.key}}'>{{item.value}}</view>
       </view>
     </view>
   </scroll-view>
@@ -19,8 +20,7 @@
       </view>
     </view>
     <view class='imgContainer' wx:if="{{item.firstImage!=null&&item.firstImage.length>0}}">
-      <image class="newsbgimg" src="{{item.firstImage}}"></image>
+      <image class="newsbgimg" src="{{item.firstImage}}" mode='aspectFill'></image>
     </view>
   </view>
 </view>
-
